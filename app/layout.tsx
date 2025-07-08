@@ -1,21 +1,42 @@
 import { CartProvider } from 'components/cart/cart-context';
 import { Navbar } from 'components/layout/navbar';
 import { WelcomeToast } from 'components/welcome-toast';
-import { GeistSans } from 'geist/font/sans';
 import { getCart } from 'lib/shopify';
+import { baseUrl } from 'lib/utils';
+import { Inter, Playfair_Display, Space_Grotesk } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import './globals.css';
-import { baseUrl } from 'lib/utils';
 
 const { SITE_NAME } = process.env;
+
+// Royal Balc Typography System
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-numeric',
+  display: 'swap',
+});
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: SITE_NAME!,
-    template: `%s | ${SITE_NAME}`
+    default: SITE_NAME || 'Royal Balc Perfume',
+    template: `%s | ${SITE_NAME || 'Royal Balc Perfume'}`
   },
+  description: 'Luxury. Designer. Long-Lasting. Affordable. Perfume re-imagined by Royal Balc.',
   robots: {
     follow: true,
     index: true
@@ -31,8 +52,8 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en" className={GeistSans.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+    <html lang="en" className={`${inter.variable} ${playfairDisplay.variable} ${spaceGrotesk.variable}`}>
+      <body className="selection:bg-[var(--color-royal-gold)] selection:text-[var(--color-midnight-blue)]">
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>
