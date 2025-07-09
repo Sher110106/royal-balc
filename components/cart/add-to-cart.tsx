@@ -16,8 +16,8 @@ function SubmitButton({
   selectedVariantId: string | undefined;
 }) {
   const buttonClasses =
-    'relative flex w-full items-center justify-center rounded-md bg-royal-gold p-4 tracking-wide text-midnight-blue font-medium hover:bg-royal-gold/90 transition-royal';
-  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
+    'relative flex w-full items-center justify-center rounded-lg bg-gray-900 py-4 px-6 text-white font-medium hover:bg-gray-800 transition-colors';
+  const disabledClasses = 'cursor-not-allowed opacity-50 hover:bg-gray-900';
 
   if (!availableForSale) {
     return (
@@ -34,9 +34,7 @@ function SubmitButton({
         disabled
         className={clsx(buttonClasses, disabledClasses)}
       >
-        <div className="absolute left-0 ml-4">
-          <PlusIcon className="h-5" />
-        </div>
+        <PlusIcon className="h-5 w-5 mr-2" />
         Add To Cart
       </button>
     );
@@ -47,9 +45,7 @@ function SubmitButton({
       aria-label="Add to cart"
       className={buttonClasses}
     >
-      <div className="absolute left-0 ml-4">
-        <PlusIcon className="h-5" />
-      </div>
+      <PlusIcon className="h-5 w-5 mr-2" />
       Add To Cart
     </button>
   );

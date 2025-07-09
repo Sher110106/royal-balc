@@ -6,24 +6,40 @@ import { VariantSelector } from './variant-selector';
 
 export function ProductDescription({ product }: { product: Product }) {
   return (
-    <>
-      <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
-        <h1 className="mb-2 text-5xl font-medium">{product.title}</h1>
-        <div className="mr-auto w-auto rounded-full bg-blue-600 p-2 text-sm text-white">
+    <div className="space-y-8">
+      {/* Product Header */}
+      <div className="space-y-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          {product.title}
+        </h1>
+        <div className="flex items-center">
           <Price
             amount={product.priceRange.maxVariantPrice.amount}
             currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+            className="text-2xl font-semibold text-gray-900"
           />
         </div>
       </div>
-      <VariantSelector options={product.options} variants={product.variants} />
+
+      {/* Product Description */}
       {product.descriptionHtml ? (
-        <Prose
-          className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-          html={product.descriptionHtml}
-        />
+        <div className="border-t border-gray-100 pt-8">
+          <Prose
+            className="text-gray-600 leading-relaxed"
+            html={product.descriptionHtml}
+          />
+        </div>
       ) : null}
-      <AddToCart product={product} />
-    </>
+
+      {/* Variant Selector */}
+      <div className="border-t border-gray-100 pt-8">
+        <VariantSelector options={product.options} variants={product.variants} />
+      </div>
+
+      {/* Add to Cart */}
+      <div className="border-t border-gray-100 pt-8">
+        <AddToCart product={product} />
+      </div>
+    </div>
   );
 }

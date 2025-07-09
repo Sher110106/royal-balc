@@ -80,31 +80,40 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
-            <Suspense
-              fallback={
-                <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
-              }
-            >
-              <Gallery
-                images={product.images.slice(0, 5).map((image: Image) => ({
-                  src: image.url,
-                  altText: image.altText
-                }))}
-              />
-            </Suspense>
-          </div>
+      
+      {/* Product Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
+            {/* Product Gallery */}
+            <div className="w-full">
+              <Suspense
+                fallback={
+                  <div className="relative aspect-square w-full bg-gray-100 rounded-xl animate-pulse" />
+                }
+              >
+                <Gallery
+                  images={product.images.slice(0, 5).map((image: Image) => ({
+                    src: image.url,
+                    altText: image.altText
+                  }))}
+                />
+              </Suspense>
+            </div>
 
-          <div className="basis-full lg:basis-2/6">
-            <Suspense fallback={null}>
-              <ProductDescription product={product} />
-            </Suspense>
+            {/* Product Details */}
+            <div className="w-full lg:py-8">
+              <Suspense fallback={<div className="h-96 bg-gray-100 rounded-xl animate-pulse" />}>
+                <ProductDescription product={product} />
+              </Suspense>
+            </div>
           </div>
         </div>
-        <RelatedProducts id={product.id} />
-      </div>
+      </section>
+
+      {/* Related Products Section */}
+      <RelatedProducts id={product.id} />
+      
       <Footer />
     </ProductProvider>
   );
@@ -116,34 +125,52 @@ async function RelatedProducts({ id }: { id: string }) {
   if (!relatedProducts.length) return null;
 
   return (
-    <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-      <ul className="flex w-full gap-4 overflow-x-auto pt-1">
-        {relatedProducts.map((product) => (
-          <li
-            key={product.handle}
-            className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
-          >
-            <Link
-              className="relative h-full w-full"
-              href={`/product/${product.handle}`}
-              prefetch={true}
-            >
-              <GridTileImage
-                alt={product.title}
-                label={{
-                  title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
-                }}
-                src={product.featuredImage?.url}
-                fill
-                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="py-16 bg-white border-t border-gray-100">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            You Might Also <span className="text-gray-600">Like</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover more fragrances that complement your style
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {relatedProducts.map((product) => (
+            <div key={product.handle} className="group">
+              <Link
+                className="block"
+                href={`/product/${product.handle}`}
+                prefetch={true}
+              >
+                <div className="relative aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50">
+                  <GridTileImage
+                    alt={product.title}
+                    label={{
+                      title: product.title,
+                      amount: product.priceRange.maxVariantPrice.amount,
+                      currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                    }}
+                    src={product.featuredImage?.url}
+                    fill
+                    sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors line-clamp-2">
+                    {product.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {product.priceRange.maxVariantPrice.currencyCode} {product.priceRange.maxVariantPrice.amount}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
