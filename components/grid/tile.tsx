@@ -1,49 +1,40 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import Label from '../label';
 
 export function GridTileImage({
   isInteractive = true,
   active,
-  label,
   ...props
 }: {
   isInteractive?: boolean;
   active?: boolean;
-  label?: {
-    title: string;
-    amount: string;
-    currencyCode: string;
-    position?: 'bottom' | 'center';
-  };
 } & React.ComponentProps<typeof Image>) {
   return (
     <div
       className={clsx(
-        'group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black',
+        'group flex h-full w-full items-center justify-center overflow-hidden bg-background',
         {
-          relative: label,
-          'border-2 border-blue-600': active,
-          'border-neutral-200 dark:border-neutral-800': !active
+          'border-2 border-accent shadow-hover': active,
+          'border border-dove-grey/20': !active
         }
       )}
     >
       {props.src ? (
+        // eslint-disable-next-line jsx-a11y/alt-text -- `alt` is inherited from `props`
         <Image
-          className={clsx('relative h-full w-full object-contain', {
-            'transition duration-300 ease-in-out group-hover:scale-105': isInteractive
+          className={clsx('relative h-full w-full object-cover', {
+            'transition-transform duration-500 ease-in-out group-hover:scale-110': isInteractive
           })}
           {...props}
         />
-      ) : null}
-      {label ? (
-        <Label
-          title={label.title}
-          amount={label.amount}
-          currencyCode={label.currencyCode}
-          position={label.position}
-        />
-      ) : null}
+      ) : (
+        // Placeholder for missing images
+        <div className="flex items-center justify-center h-full w-full bg-dove-grey/10">
+          <svg className="w-16 h-16 text-dove-grey/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }

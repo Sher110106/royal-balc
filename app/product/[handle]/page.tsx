@@ -125,13 +125,13 @@ async function RelatedProducts({ id }: { id: string }) {
   if (!relatedProducts.length) return null;
 
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="py-16 bg-background border-t border-dove-grey/20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            You Might Also <span className="text-gray-600">Like</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+            You Might Also <span className="text-text-secondary">Like</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Discover more fragrances that complement your style
           </p>
         </div>
@@ -159,10 +159,10 @@ async function RelatedProducts({ id }: { id: string }) {
                   />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors line-clamp-2">
+                  <h3 className="font-medium text-text-primary group-hover:text-accent transition-colors line-clamp-2">
                     {product.title}
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-text-secondary">
                     {product.priceRange.maxVariantPrice.currencyCode} {product.priceRange.maxVariantPrice.amount}
                   </p>
                 </div>

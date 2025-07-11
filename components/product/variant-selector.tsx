@@ -38,7 +38,7 @@ export function VariantSelector({
   return options.map((option) => (
     <div key={option.id} className="space-y-4">
       <div className="space-y-3">
-        <h3 className="text-sm font-medium text-gray-900 uppercase tracking-wide">
+        <h3 className="text-sm font-medium text-text-primary uppercase tracking-wide">
           {option.name}
         </h3>
         <div className="flex flex-wrap gap-3">
@@ -65,7 +65,7 @@ export function VariantSelector({
 
             return (
               <button
-                formAction={() => {
+                onClick={() => {
                   const newState = updateOption(optionNameLowerCase, value);
                   updateURL(newState);
                 }}
@@ -76,10 +76,10 @@ export function VariantSelector({
                 className={clsx(
                   'flex min-w-[48px] items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors',
                   {
-                    'border-gray-900 bg-gray-900 text-white': isActive,
-                    'border-gray-300 bg-white text-gray-900 hover:border-gray-400':
-                      !isActive && isAvailableForSale,
-                    'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed':
+                    'border-accent bg-accent text-background': isActive,
+                    'border-dove-grey/30 bg-background text-text-primary hover:border-accent/50':
+                      !isActive && !!isAvailableForSale,
+                    'border-dove-grey/20 bg-dove-grey/10 text-text-secondary cursor-not-allowed':
                       !isAvailableForSale
                   }
                 )}

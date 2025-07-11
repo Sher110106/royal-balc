@@ -318,7 +318,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
         >
-          <div className="w-8 h-px bg-zinc-400" />
+          <div className="w-8 h-px bg-zinc-400 mt-2" />
           <span className="text-xs text-zinc-500 font-light tracking-widest uppercase">
             Royal Balc
           </span>

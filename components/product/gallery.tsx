@@ -13,7 +13,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
   const previousImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
 
   const buttonClassName =
-    'h-12 w-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white transition-all flex items-center justify-center text-gray-600 hover:text-gray-900';
+    'h-12 w-12 rounded-full bg-background/90 backdrop-blur-sm shadow-lg hover:bg-background transition-all flex items-center justify-center text-text-secondary hover:text-accent border border-dove-grey/20 hover:border-accent/30';
 
   return (
     <div className="space-y-4">
@@ -77,7 +77,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                 }}
                 aria-label={`Select image ${index + 1}`}
                 className={`flex-none w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                  isActive ? 'border-gray-900' : 'border-gray-200 hover:border-gray-400'
+                  isActive ? 'border-accent' : 'border-dove-grey/30 hover:border-accent/50'
                 }`}
               >
                 <Image

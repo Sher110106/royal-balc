@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { createContext, useContext, useMemo, useOptimistic } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type ProductState = {
   [key: string]: string;
@@ -19,33 +19,26 @@ const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export function ProductProvider({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
+  const [state, setState] = useState<ProductState>({});
 
-  const getInitialState = () => {
+  useEffect(() => {
     const params: ProductState = {};
     for (const [key, value] of searchParams.entries()) {
       params[key] = value;
     }
-    return params;
-  };
-
-  const [state, setOptimisticState] = useOptimistic(
-    getInitialState(),
-    (prevState: ProductState, update: ProductState) => ({
-      ...prevState,
-      ...update
-    })
-  );
+    setState(params);
+  }, [searchParams]);
 
   const updateOption = (name: string, value: string) => {
-    const newState = { [name]: value };
-    setOptimisticState(newState);
-    return { ...state, ...newState };
+    const newState = { ...state, [name]: value };
+    setState(newState);
+    return newState;
   };
 
   const updateImage = (index: string) => {
-    const newState = { image: index };
-    setOptimisticState(newState);
-    return { ...state, ...newState };
+    const newState = { ...state, image: index };
+    setState(newState);
+    return newState;
   };
 
   const value = useMemo(

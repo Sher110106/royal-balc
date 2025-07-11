@@ -106,6 +106,13 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     >
                       About
                     </Link>
+                    <Link
+                      href="/contact"
+                      onClick={closeMobileMenu}
+                      className="flex items-center px-4 py-4 text-lg font-medium text-text-primary hover:text-accent hover:bg-accent/5 rounded-xl transition-all duration-300"
+                    >
+                      Contact
+                    </Link>
                     {menu.length ? (
                       <>
                         {menu.map((item: Menu) => (
@@ -126,14 +133,14 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                 {/* Footer */}
                 <div className="p-6 border-t border-dove-grey/10">
                   <Link
-                    href="/account"
+                    href="/contact"
                     onClick={closeMobileMenu}
                     className="flex items-center justify-center px-6 py-3 bg-accent text-background rounded-xl font-medium hover:bg-accent/90 transition-all duration-300"
                   >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    My Account
+                    Contact Us
                   </Link>
                 </div>
               </div>

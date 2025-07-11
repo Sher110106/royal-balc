@@ -32,9 +32,9 @@ export async function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Royal Balc Logo"
-                width={140}
-                height={45}
-                className="h-12 w-auto"
+                width={400}
+                height={400}
+                className="h-20 w-auto"
                 priority
               />
             </Link>
@@ -84,6 +84,14 @@ export async function Navbar() {
                 className="relative font-body text-base font-medium text-text-primary hover:text-accent transition-all duration-300 group"
               >
                 <span>About</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              
+              <Link
+                href="/contact"
+                className="relative font-body text-base font-medium text-text-primary hover:text-accent transition-all duration-300 group"
+              >
+                <span>Contact</span>
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </div>

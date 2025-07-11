@@ -377,34 +377,42 @@ export async function getCollectionProducts({
 }
 
 export async function getCollections(): Promise<Collection[]> {
-  'use cache';
-  cacheTag(TAGS.collections);
-  cacheLife('days');
-
   const res = await shopifyFetch<ShopifyCollectionsOperation>({
-    query: getCollectionsQuery
+    query: getCollectionsQuery,
+    tags: [TAGS.collections]
   });
-  const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
-  const collections = [
-    {
-      handle: '',
-      title: 'All',
-      description: 'All products',
-      seo: {
-        title: 'All',
-        description: 'All products'
-      },
-      path: '/search',
-      updatedAt: new Date().toISOString()
-    },
-    // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the search page.
-    ...reshapeCollections(shopifyCollections).filter(
-      (collection) => !collection.handle.startsWith('hidden')
-    )
+  const shopifyCollections = removeEdgesAndNodes(res.body.data.collections);
+  const collections = reshapeCollections(shopifyCollections);
+
+  // Define the desired order of collections
+  const desiredOrder = [
+    'Warm & Sensual Woods',
+    'Fresh & Everyday',
+    'Elegant Allure',
+    'Signature Power Scents'
   ];
 
-  return collections;
+  // Create a map for quick lookups of collections by title
+  const collectionsMap = new Map(collections.map((collection) => [collection.title, collection]));
+
+  // Create the ordered list of collections, filtering out any that might not exist
+  const orderedCollections = desiredOrder
+    .map((title) => collectionsMap.get(title))
+    .filter((collection): collection is Collection => collection !== undefined);
+
+  // Find all other collections that are not in the desired order and filter out unwanted items
+  const otherCollections = collections.filter(
+    (collection) => !desiredOrder.includes(collection.title) &&
+    !collection.handle.startsWith('hidden-') &&
+    collection.title !== 'Home page' &&
+    collection.title !== 'Homepage' &&
+    collection.title !== 'Home'
+  );
+
+  // Combine the ordered collections with the rest
+  const finalCollections = [...orderedCollections, ...otherCollections];
+
+  return finalCollections;
 }
 
 export async function getMenu(handle: string): Promise<Menu[]> {
