@@ -147,11 +147,6 @@ async function RelatedProducts({ id }: { id: string }) {
                 <div className="relative aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50">
                   <GridTileImage
                     alt={product.title}
-                    label={{
-                      title: product.title,
-                      amount: product.priceRange.maxVariantPrice.amount,
-                      currencyCode: product.priceRange.maxVariantPrice.currencyCode
-                    }}
                     src={product.featuredImage?.url}
                     fill
                     sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"

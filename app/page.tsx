@@ -1,7 +1,7 @@
-import { Carousel } from 'components/carousel';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import HeroSection from 'components/hero-section';
 import Footer from 'components/layout/footer';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
@@ -108,10 +108,16 @@ function FragranceQuizTeaser() {
       <div className="container mx-auto px-gutter">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-midnight-blue/20 to-royal-gold/20">
-              <div className="absolute inset-0 bg-[url('/lifestyle-quiz.jpg')] bg-cover bg-center"></div>
-            </div>
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-hover">
+            <Image
+              src="/Product-1.png"
+              alt="Royal Balc luxury fragrance bottle showcasing elegant design"
+              width={600}
+              height={450}
+              className="w-full h-full object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-midnight-blue/10 to-royal-gold/10"></div>
           </div>
           
           {/* Content */}
@@ -157,20 +163,34 @@ function SocialProof() {
               ))}
             </div>
             <span className="font-body font-semibold text-text-primary">4.8 out of 5</span>
-            <span className="font-body text-text-secondary">(600 reviews)</span>
+            <span className="font-body text-text-secondary">(100 reviews)</span>
           </div>
           <p className="font-body text-text-secondary">
             Join thousands of customers sharing their Royal Balc experience
           </p>
         </div>
         
-        {/* Instagram Feed Placeholder */}
+        {/* Customer Photos Gallery */}
         <div className="overflow-hidden">
-          <div className="flex space-x-4 animate-scroll">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="flex-none w-48 h-48 bg-dove-grey/20 rounded-lg flex items-center justify-center">
-                <span className="text-text-secondary text-sm">Customer Photo {item}</span>
-              </div>
+          <div className="flex space-x-6 animate-scroll">
+            {[
+              { src: '/Customer-1.png', alt: 'Happy customer enjoying Royal Balc fragrance' },
+              { src: '/Customer-2.png', alt: 'Customer showcasing Royal Balc perfume bottle' },
+              { src: '/Customer-3.png', alt: 'Elegant customer with Royal Balc fragrance' },
+              { src: '/Customer-4.png', alt: 'Satisfied customer holding Royal Balc perfume' },
+              { src: '/Customer-1.png', alt: 'Happy customer enjoying Royal Balc fragrance' },
+              { src: '/Customer-2.png', alt: 'Customer showcasing Royal Balc perfume bottle' }
+                         ].map((customer, index) => (
+               <div key={index} className="flex-none w-64 h-64 rounded-2xl overflow-hidden shadow-lg group hover:shadow-hover transition-all duration-300">
+                 <Image
+                   src={customer.src}
+                   alt={customer.alt}
+                   width={256}
+                   height={256}
+                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                   priority={index < 4}
+                 />
+               </div>
             ))}
           </div>
         </div>
@@ -217,7 +237,7 @@ export default function HomePage() {
 
       <FragranceQuizTeaser />
       
-      {/* Carousel Section */}
+      {/* Trending Now Photos */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-gutter">
           <div className="text-center mb-12">
@@ -228,9 +248,40 @@ export default function HomePage() {
               Explore the most popular fragrances chosen by our community
             </p>
           </div>
-          <Suspense fallback={<div className="h-64 bg-dove-grey/20 rounded-lg animate-pulse"></div>}>
-            <Carousel />
-          </Suspense>
+          
+          {/* Product Photos Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+            {[
+              { src: '/Product-1.png', alt: 'Trending Royal Balc fragrance bottle' },
+              { src: '/Product-2.png', alt: 'Popular Royal Balc perfume collection' },
+              { src: '/Product-3.png', alt: 'Bestselling Royal Balc luxury fragrance' }
+            ].map((product, index) => (
+              <div key={index} className="relative aspect-square overflow-hidden rounded-2xl shadow-lg group hover:shadow-hover transition-all duration-500">
+                <Image
+                  src={product.src}
+                  alt={product.alt}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  priority={index < 3}
+                />
+                <div className="absolute inset-0 bg-midnight-blue/0 group-hover:bg-midnight-blue/5 transition-all duration-300"></div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Shop Button */}
+          <div className="text-center">
+            <Link
+              href="/search"
+              className="inline-flex items-center px-8 py-4 bg-royal-gold text-midnight-blue font-body font-semibold rounded-xl hover:bg-royal-gold/90 transition-royal shadow-lg hover:shadow-hover"
+            >
+              Shop Collection
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

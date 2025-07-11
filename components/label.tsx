@@ -12,13 +12,13 @@ const Label = ({
   return (
     <div className="space-y-2">
       {/* Product Title */}
-      <h3 className="font-heading text-base font-semibold text-text-primary leading-tight line-clamp-2 group-hover:text-accent transition-colors duration-300">
+      <h3 className="font-heading text-base font-medium text-text-primary leading-tight line-clamp-2 group-hover:text-accent transition-colors duration-300">
         {title}
       </h3>
       
       {/* Price */}
       <Price
-        className="text-lg font-numeric font-bold text-accent"
+        className="font-numeric text-lg font-semibold text-text-primary"
         amount={amount}
         currencyCode={currencyCode}
       />

@@ -170,6 +170,17 @@
   .animate-fadeIn {
     animation: fadeIn 0.6s ease-out forwards;
   }
+
+  /* Scrollbar hide utility */
+  .scrollbar-hide {
+    /* Firefox */
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    /* Safari and Chrome */
+    display: none;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

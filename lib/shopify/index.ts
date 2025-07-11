@@ -125,7 +125,7 @@ export async function shopifyFetch<T>({
       throw {
         cause: 'Invalid JSON',
         status: result.status,
-        message: jsonErr.message,
+        message: jsonErr instanceof Error ? jsonErr.message : 'JSON parsing failed',
         responseText: text.slice(0, 200),
         query
       };
@@ -377,9 +377,12 @@ export async function getCollectionProducts({
 }
 
 export async function getCollections(): Promise<Collection[]> {
+  'use cache';
+  cacheTag(TAGS.collections);
+  cacheLife('days');
+
   const res = await shopifyFetch<ShopifyCollectionsOperation>({
-    query: getCollectionsQuery,
-    tags: [TAGS.collections]
+    query: getCollectionsQuery
   });
   const shopifyCollections = removeEdgesAndNodes(res.body.data.collections);
   const collections = reshapeCollections(shopifyCollections);
