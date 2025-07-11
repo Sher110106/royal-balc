@@ -8,23 +8,21 @@ export function WelcomeToast() {
     // ignore if screen height is too small
     if (window.innerHeight < 650) return;
     if (!document.cookie.includes('welcome-toast=2')) {
-      toast('🛍️ Welcome to Next.js Commerce!', {
+      toast('✨ Welcome to Royal Balc', {
         id: 'welcome-toast',
-        duration: Infinity,
+        duration: 8000, // Show for 8 seconds instead of infinity
         onDismiss: () => {
           document.cookie = 'welcome-toast=2; max-age=31536000; path=/';
         },
         description: (
           <>
-            This is a high-performance, SSR storefront powered by Shopify, Next.js, and Vercel.{' '}
+            Discover luxury fragrances crafted for the modern connoisseur. Where elegance meets accessibility.{' '}
             <a
-              href="https://vercel.com/templates/next.js/nextjs-commerce"
-              className="text-blue-600 hover:underline"
-              target="_blank"
+              href="/search"
+              className="text-royal-gold hover:text-royal-gold/80 font-semibold transition-colors"
             >
-              Deploy your own
+              Explore Collection
             </a>
-            .
           </>
         )
       });

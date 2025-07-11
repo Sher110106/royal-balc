@@ -58,6 +58,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${playfairDisplay.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </head>
       <body className="selection:bg-[var(--color-royal-gold)] selection:text-[var(--color-midnight-blue)]">
         <CartProvider cartPromise={cart}>
           <Navbar />
