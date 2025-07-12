@@ -308,23 +308,29 @@ export async function updateCart(
 }
 
 export async function getCart(): Promise<Cart | undefined> {
-  const cartId = (await cookies()).get('cartId')?.value;
+  try {
+    const cartId = (await cookies()).get('cartId')?.value;
 
-  if (!cartId) {
+    if (!cartId) {
+      return undefined;
+    }
+
+    const res = await shopifyFetch<ShopifyCartOperation>({
+      query: getCartQuery,
+      variables: { cartId }
+    });
+
+    // Old carts becomes `null` when you checkout.
+    if (!res.body.data.cart) {
+      return undefined;
+    }
+
+    return reshapeCart(res.body.data.cart);
+  } catch (error) {
+    // During build time or when cookies are not available, return undefined
+    console.warn('[getCart] Cookies not available (likely during build time):', error);
     return undefined;
   }
-
-  const res = await shopifyFetch<ShopifyCartOperation>({
-    query: getCartQuery,
-    variables: { cartId }
-  });
-
-  // Old carts becomes `null` when you checkout.
-  if (!res.body.data.cart) {
-    return undefined;
-  }
-
-  return reshapeCart(res.body.data.cart);
 }
 
 export async function getCollection(
