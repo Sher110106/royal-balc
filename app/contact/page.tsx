@@ -32,22 +32,24 @@ export default function ContactPage() {
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Phone */}
+              {/* WhatsApp */}
               <div className="bg-porcelain/5 p-8 rounded-lg text-center border border-dove-grey/10 hover:shadow-hover transition-royal">
                 <div className="w-16 h-16 bg-royal-gold rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg className="w-8 h-8 text-midnight-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-text-primary mb-3">Phone</h3>
-                <p className="text-text-secondary mb-4">Call us directly for immediate assistance</p>
+                <h3 className="font-heading text-xl font-bold text-text-primary mb-3">WhatsApp</h3>
+                <p className="text-text-secondary mb-4">Contact us via WhatsApp for instant assistance</p>
                 <a 
-                  href="tel:+16472260151" 
+                  href="https://wa.me/16472260151" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-numeric text-lg font-semibold text-royal-gold hover:text-royal-gold/80 transition-royal"
                 >
                   +1 647-226-0151
                 </a>
-                <p className="text-text-secondary text-sm mt-2">Mon-Fri: 9AM-6PM EST</p>
+                <p className="text-text-secondary text-sm mt-2">Available Mon-Fri: 9AM-6PM EST</p>
               </div>
 
               {/* Email */}
@@ -60,10 +62,10 @@ export default function ContactPage() {
                 <h3 className="font-heading text-xl font-bold text-text-primary mb-3">Email</h3>
                 <p className="text-text-secondary mb-4">Send us a message anytime</p>
                 <a 
-                  href="mailto:hello@royalbalc.com" 
+                  href="mailto:royalbalc0103@gmail.com" 
                   className="font-body text-lg font-semibold text-royal-gold hover:text-royal-gold/80 transition-royal"
                 >
-                  hello@royalbalc.com
+                  royalbalc0103@gmail.com
                 </a>
                 <p className="text-text-secondary text-sm mt-2">Response within 24 hours</p>
               </div>
@@ -78,10 +80,10 @@ export default function ContactPage() {
                 <h3 className="font-heading text-xl font-bold text-text-primary mb-3">Support</h3>
                 <p className="text-text-secondary mb-4">Need help with your order?</p>
                 <a 
-                  href="mailto:support@royalbalc.com" 
+                  href="mailto:royalbalc0103@gmail.com" 
                   className="font-body text-lg font-semibold text-royal-gold hover:text-royal-gold/80 transition-royal"
                 >
-                  support@royalbalc.com
+                  royalbalc0103@gmail.com
                 </a>
                 <p className="text-text-secondary text-sm mt-2">Order tracking & returns</p>
               </div>
@@ -111,7 +113,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-6 p-4 bg-royal-gold/10 rounded-lg">
                   <p className="text-text-secondary text-sm">
-                    <strong className="text-royal-gold">Note:</strong> Email support is available 24/7. 
+                    <strong className="text-royal-gold">Note:</strong> WhatsApp and email support are available 24/7. 
                     We'll respond to all inquiries within 24 hours during business days.
                   </p>
                 </div>
@@ -178,13 +180,15 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+16472260151"
+                href="https://wa.me/16472260151"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-royal-gold text-midnight-blue font-body font-semibold rounded-md hover:bg-royal-gold/90 transition-royal"
               >
-                Call Now
+                WhatsApp
               </a>
               <a
-                href="mailto:hello@royalbalc.com"
+                href="mailto:royalbalc0103@gmail.com"
                 className="px-8 py-4 border-2 border-royal-gold text-royal-gold font-body font-semibold rounded-md hover:bg-royal-gold hover:text-midnight-blue transition-royal"
               >
                 Send Email

@@ -68,22 +68,6 @@ export default async function CategoryPage(props: {
           <p className="text-xl md:text-2xl text-text-secondary leading-relaxed max-w-3xl mx-auto mb-8">
             {collectionDescription}
           </p>
-          
-          {/* Collection Stats */}
-          <div className="flex items-center justify-center space-x-8 text-text-secondary">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span className="text-sm font-medium">{products.length} Fragrances</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm font-medium">Premium Quality</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className="text-sm font-medium">Luxury Collection</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -136,18 +120,6 @@ export default async function CategoryPage(props: {
                   {products.length} carefully curated fragrances
                 </p>
               </div>
-              
-              {/* Collection Stats */}
-              <div className="flex items-center gap-6 text-sm text-text-secondary">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-accent rounded-full"></div>
-                  <span className="font-medium">{products.length} Products</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span className="font-medium">Collection</span>
-                </div>
-              </div>
             </div>
 
             {/* Enhanced Products Grid */}
@@ -182,7 +154,8 @@ export default async function CategoryPage(props: {
               </div>
             </div>
           </div>
-        )}
+        )
+        }
       </div>
     </div>
   );

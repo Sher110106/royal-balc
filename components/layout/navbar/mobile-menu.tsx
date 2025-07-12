@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ChevronDownIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Menu } from 'lib/shopify/types';
 
 export default function MobileMenu({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [shopSubmenuOpen, setShopSubmenuOpen] = useState(false);
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
 
@@ -27,7 +28,12 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
 
   useEffect(() => {
     setIsOpen(false);
+    setShopSubmenuOpen(false);
   }, [pathname, searchParams]);
+
+  const toggleShopSubmenu = () => {
+    setShopSubmenuOpen(!shopSubmenuOpen);
+  };
 
   return (
     <>
@@ -60,7 +66,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-background/95 backdrop-blur-md">
+            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white">
               <div className="flex flex-col h-full">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-dove-grey/10">
@@ -84,13 +90,56 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                     >
                       Home
                     </Link>
-                    <Link
-                      href="/search"
-                      onClick={closeMobileMenu}
-                      className="flex items-center px-4 py-4 text-lg font-medium text-text-primary hover:text-accent hover:bg-accent/5 rounded-xl transition-all duration-300"
-                    >
-                      Shop
-                    </Link>
+                    
+                    {/* Shop with Submenu */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={toggleShopSubmenu}
+                        className="flex items-center justify-between w-full px-4 py-4 text-lg font-medium text-text-primary hover:text-accent hover:bg-accent/5 rounded-xl transition-all duration-300"
+                      >
+                        <span>Shop</span>
+                        {shopSubmenuOpen ? (
+                          <ChevronDownIcon className="h-5 w-5" />
+                        ) : (
+                          <ChevronRightIcon className="h-5 w-5" />
+                        )}
+                      </button>
+                      
+                      {/* Shop Submenu */}
+                      <Transition
+                        show={shopSubmenuOpen}
+                        enter="transition-all duration-300 ease-out"
+                        enterFrom="opacity-0 max-h-0"
+                        enterTo="opacity-100 max-h-40"
+                        leave="transition-all duration-200 ease-in"
+                        leaveFrom="opacity-100 max-h-40"
+                        leaveTo="opacity-0 max-h-0"
+                      >
+                        <div className="ml-6 space-y-1 overflow-hidden">
+                          <Link
+                            href="/search/men"
+                            onClick={closeMobileMenu}
+                            className="flex items-center px-4 py-3 text-base font-medium text-text-secondary hover:text-accent hover:bg-accent/5 rounded-xl transition-all duration-300"
+                          >
+                            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Men
+                          </Link>
+                          <Link
+                            href="/search/women"
+                            onClick={closeMobileMenu}
+                            className="flex items-center px-4 py-3 text-base font-medium text-text-secondary hover:text-accent hover:bg-accent/5 rounded-xl transition-all duration-300"
+                          >
+                            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Women
+                          </Link>
+                        </div>
+                      </Transition>
+                    </div>
+                    
                     <Link
                       href="/about"
                       onClick={closeMobileMenu}

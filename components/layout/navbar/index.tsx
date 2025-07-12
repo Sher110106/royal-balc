@@ -13,7 +13,7 @@ export async function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-dove-grey/20 shadow-sm">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between h-20 px-6 lg:px-8">
+        <div className="flex items-center justify-between h-24 px-6 lg:px-8">
           {/* Mobile Menu */}
           <div className="flex items-center md:hidden">
             <Suspense fallback={null}>
@@ -32,9 +32,9 @@ export async function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Royal Balc Logo"
-                width={400}
-                height={400}
-                className="h-20 w-auto"
+                width={500}
+                height={500}
+                className="h-22 w-auto"
                 priority
               />
             </Link>
@@ -65,7 +65,42 @@ export async function Navbar() {
                   <div className="p-6">
                     <div className="space-y-3">
                       <h3 className="font-heading text-lg font-semibold text-text-primary mb-4">Collections</h3>
-                      <p className="text-text-secondary text-sm leading-relaxed">Discover our curated collections of luxury fragrances crafted for the discerning individual.</p>
+                      
+                      {/* Collection Links */}
+                      <div className="space-y-2">
+                        <Link
+                          href="/search/men"
+                          className="flex items-center px-4 py-3 text-text-primary hover:text-accent hover:bg-accent/5 rounded-lg transition-all duration-200 group/item"
+                        >
+                          <svg className="w-5 h-5 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                          <div>
+                            <div className="font-medium text-sm">Men</div>
+                            <div className="text-xs text-text-secondary">Fragrances for him</div>
+                          </div>
+                          <svg className="w-4 h-4 ml-auto opacity-0 group-hover/item:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                        
+                        <Link
+                          href="/search/women"
+                          className="flex items-center px-4 py-3 text-text-primary hover:text-accent hover:bg-accent/5 rounded-lg transition-all duration-200 group/item"
+                        >
+                          <svg className="w-5 h-5 mr-3 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                          <div>
+                            <div className="font-medium text-sm">Women</div>
+                            <div className="text-xs text-text-secondary">Fragrances for her</div>
+                          </div>
+                          <svg className="w-4 h-4 ml-auto opacity-0 group-hover/item:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                      
                       <div className="mt-4 pt-4 border-t border-dove-grey/20">
                         <Link href="/search" className="inline-flex items-center text-accent hover:text-accent/80 transition-colors font-medium text-sm">
                           View All Collections
